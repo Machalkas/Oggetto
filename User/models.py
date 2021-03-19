@@ -24,16 +24,16 @@ class User(AbstractUser):
     first_name=None
     last_name=None
     email = models.EmailField('Email', unique=True)
-    is_shop = models.BooleanField(null=False, default=False, blank=True, )
+    is_shop = models.BooleanField(null=False, default=False, blank=True, verbose_name="Магазин")
 
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = []
     objects=Manager()
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
     def save(self,*args,**kwargs):
-        try:
+        # try:
         #     if User.objects.get(email=self.email).is_specialist==False and self.is_specialist==True:
         #         send_mail('Хакатон | Изменение прав пользователя', 'Ваши права пользователя были изменены, теперь вы являетесь кейсодателем. Вы можете зарегестрировать свою компанию и публековать кейсы от лица этой компании', '', [self.email], fail_silently=True)
         # except:
