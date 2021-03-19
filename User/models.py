@@ -10,8 +10,8 @@ class Manager(UserManager):
         user=self.model(email=email,)
         user.save(using=self._db)
         return user
-    def create_superuser(self, email, first_name, last_name, password=None):
-        user=self.model(email=email,first_name=first_name,last_name=last_name)
+    def create_superuser(self, email, password=None):
+        user=self.model(email=email)
         # user.username=""
         user.is_staff=True
         user.is_superuser=True
@@ -21,8 +21,10 @@ class Manager(UserManager):
 
 class User(AbstractUser):
     username = None
+    first_name=None
+    last_name=None
     email = models.EmailField('Email', unique=True)
-    is_shop = models.BooleanField(null=False, default=False, blank=True)
+    is_shop = models.BooleanField(null=False, default=False, blank=True, )
 
     USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['first_name', 'last_name']
@@ -32,8 +34,8 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
     def save(self,*args,**kwargs):
         try:
-            if User.objects.get(email=self.email).is_specialist==False and self.is_specialist==True:
-                send_mail('Хакатон | Изменение прав пользователя', 'Ваши права пользователя были изменены, теперь вы являетесь кейсодателем. Вы можете зарегестрировать свою компанию и публековать кейсы от лица этой компании', '', [self.email], fail_silently=True)
-        except:
-            pass
+        #     if User.objects.get(email=self.email).is_specialist==False and self.is_specialist==True:
+        #         send_mail('Хакатон | Изменение прав пользователя', 'Ваши права пользователя были изменены, теперь вы являетесь кейсодателем. Вы можете зарегестрировать свою компанию и публековать кейсы от лица этой компании', '', [self.email], fail_silently=True)
+        # except:
+        #     pass
         super().save(*args,**kwargs)
