@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head%}
+<!--стили ток для этой стр. -->
+{% endblock head %}
+{% block title %}Хакатон | Вход{% endblock title %}
+{% block content %}
+{% include "header.html" %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>Создание магазина</h1>
+    {{form.as_p}}
+    <input type="submit" value="Отправить">
+  </form>
+
+{% endblock %}
+{%block scripts%}
+<!--скрипты ток для этой стр. -->
+{%endblock%}

@@ -12,11 +12,13 @@ def join(request):
             user = authenticate(email=email, password=user_pass)
             logout(request)
             login(request, user)
-            url=request.GET.get('next','/')
-            return redirect(url) 
+            if user.is_shop:
+                return redirect("/streams")
+            else:
+                return redirect("/")    
     else:
         form=SignUpForm()
-    return render(request, 'User/join.html', {'form':form, "join":True})
+    return render(request, 'User/join.html', {'form':form})
 
 def logIn(request):
     if request.method == "POST":
@@ -27,8 +29,11 @@ def logIn(request):
             user = authenticate(email=email, password=user_pass)
             if user!=None and user.is_active:
                     login(request, user)
-                    url=request.GET.get('next','/')
-                    return redirect(url)   
+                    # url=request.GET.get('next','/')
+                    if user.is_shop:
+                        return redirect("/streams")
+                    else:
+                        return redirect("/")   
             else:
                 pass        
     else:
