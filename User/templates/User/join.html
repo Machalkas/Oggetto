@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head%}
+<!--стили ток для этой стр. -->
+{% endblock head %}
+{% block title %}Хакатон | Регистрация{% endblock title %}
+{% block content %}
+{% include "header.html" %}
+
+<form method="post" class="form mt-3" id="login_form">
+    {% csrf_token %}
+    <h1>Регистрация</h1>
+    <p>{{form.email}}</p><p>{{form.errors.email}}</p>
+    <p>{{form.is_shop}} это магазин</p><p>{{form.errors.is_shop}}</p>
+    <p>{{form.password1}}</p><p>{{form.errors.password1}}</p>
+    <p>{{form.password2}}</p><p>{{form.errors.password2}}</p>
+    <input type="submit" value="Отправить">
+  </form>
+  <a href="/user/login">Вход</a>
+
+  {% endblock %}
+  {%block scripts%}
+<!--скрипты ток для этой стр. -->
+  {%endblock%}

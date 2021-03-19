@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <!-- общие стили -->
+    {% block head%}{% endblock head %}
+
+    <title>{% block title %}{% endblock %}</title>
+    </head>
+
+<body>
+
+    {% block content %}{% endblock%}
+    <!-- общие скрипты -->
+    {% block scripts %}{% endblock%}
+</body>
+
+</html>

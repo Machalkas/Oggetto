@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head%}
+<!--стили ток для этой стр. -->
+{% endblock head %}
+{% block title %}Хакатон | Вход{% endblock title %}
+{% block content %}
+{% include "header.html" %}
+
+<form method="post" class="form mt-3" id="login_form">
+    {% csrf_token %}
+    <h1>Вход</h1>
+    <p>{{form.email}}</p><p>{{form.errors.email}}</p>
+    <p>{{form.password}}</p><p>{{form.errors.password}}</p>
+    <input type="submit" value="Отправить">
+  </form>
+<a href="/user/join">Регистрация</a>
+
+{% endblock %}
+{%block scripts%}
+<!--скрипты ток для этой стр. -->
+{%endblock%}
