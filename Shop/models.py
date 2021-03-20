@@ -6,7 +6,7 @@ class Shop(models.Model):
     name=models.CharField(max_length=50, blank=False, null=False, unique=True, verbose_name="Название магазина")
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")
     url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
-    logo=models.ImageField(upload_to="logo", blank=True, null=True, verbose_name="Логотип")
+    # logo=models.ImageField(upload_to="logo", blank=True, null=True, verbose_name="Логотип")
     def __str__(self):
         return self.name
     class Meta:
@@ -20,7 +20,7 @@ class Goods(models.Model):
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")
     cost=models.PositiveIntegerField(blank=False, null=False, verbose_name="Стоимость")
     url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
-    img=models.ImageField(upload_to="goods", blank=True, null=True, verbose_name="Изображение")
+    # img=models.ImageField(upload_to="goods", blank=True, null=True, verbose_name="Изображение")
     def __str__(self):
         return self.name
     class Meta:

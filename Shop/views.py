@@ -2,23 +2,26 @@ from django.shortcuts import render, redirect
 from .forms import ShopForm
 from User.models import User
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
+from .models import Shop
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .serializers import ShopSerializers
 
-def create(request):
-    if not request.user.is_shop:
-        return redirect("/")
-    if request.method=="POST":
-        form=ShopForm(request.POST, request.FILES)
-        if form.is_valid():
-            shop=form.save()
-            shop.user=request.user
-            shop.save()
-            return redirect("/streams") 
-    else:
-        form=ShopForm()
-    return render(request, 'Shop/create.html', {'form':form})
+# def create(request):
+#     if not request.user.is_shop:
+#         return redirect("/")
+#     if request.method=="POST":
+#         form=ShopForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             shop=form.save()
+#             shop.user=request.user
+#             shop.save()
+#             return redirect("/streams") 
+#     else:
+#         form=ShopForm()
+#     return render(request, 'Shop/create.html', {'form':form})
 
 # def create(request):
 #     if request.method=="POST":
@@ -36,7 +39,17 @@ def create(request):
 #             else:
 #                 return JsonResponse({"error":"форма не валидна"}, status=400)
         
-class ArticleView(APIView):
+class view(APIView):
     def get(self, request):
-        articles = Article.objects.all()
-        return Response({"articles": articles})
+        # print(request.query_params["action"])
+        articles = Shop.objects.get(user=request.user)
+        ser=ShopSerializers(articles, many=False)
+        return Response(ser.data)
+
+class create(APIView):
+    def post(self, request):
+        shop=ShopSerializers(data=request.data)
+        if shop.is_valid():
+            shop.save()
+            return Response(status=201)
+        return Response(status=400)
