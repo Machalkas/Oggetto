@@ -10,6 +10,7 @@ from User.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import StreamSerializers
+from Shop.serializers import GoodsSerializers
 
 
 # def listSt(request):
@@ -78,7 +79,18 @@ class list(APIView):
             return x
         st = Stream.objects.filter(shop=sh)
         ser=StreamSerializers(st, many=True)
-        x=Response(ser.data)
+        # gd=Goods.objects.filter(stream=st)
+        # sergd=GoodsSerializers(gd, many=True)
+        # print(ser.data)
+        s=ser.data
+        # s.append(1)
+        # goods=[]
+        # for i in sergd:
+        #     goods.append(i.data)
+        # s={"stream":s,"goods":goods}
+        # for i in request.data["goods"]:
+
+        x=Response(s)
         x["Access-Control-Allow-Origin"]="*"
         return x
 
@@ -91,14 +103,28 @@ class create(APIView):
             x=Response({"error":""}, status=400)
             x["Access-Control-Allow-Origin"]="*"
             return x
-        st=StreamSerializers(data=request.data["data"], many=True)
+        st=StreamSerializers(data=request.data["data"])
         if st.is_valid():
             x=st.save()
             x.shop=sh
             x.save()
+            for i in request.data["goods"]:
+                gd=GoodsSerializers(data=i)
+                if gd.is_valid():
+                    s=gd.save()
+                    s.shop=sh
+                    s.stream=x
+                    s.save()
+
             x=Response(status=201)
             x["Access-Control-Allow-Origin"]="*"
             return x
         x=Response(status=400)
         x["Access-Control-Allow-Origin"]="*"
         return x
+
+
+
+
+
+

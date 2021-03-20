@@ -18,8 +18,9 @@ class Goods(models.Model):
     stream=models.ForeignKey("Stream.Stream", blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Стрим")
     name=models.CharField(max_length=50, blank=False, null=False, verbose_name="Название товара")
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")
-    cost=models.PositiveIntegerField(blank=False, null=False, verbose_name="Стоимость")
-    url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
+    price=models.PositiveIntegerField(blank=False, null=False, verbose_name="Стоимость")
+    # url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
+    articul=models.CharField(max_length=100, blank=False, null=False, default="", verbose_name="Артикул")
     # img=models.ImageField(upload_to="goods", blank=True, null=True, verbose_name="Изображение")
     def __str__(self):
         return self.name
