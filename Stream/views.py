@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from .serializers import StreamSerializers
 from Shop.serializers import GoodsSerializers
 
+from django.http import QueryDict
 
 # def listSt(request):
 #     try:
@@ -79,17 +80,7 @@ class list(APIView):
             return x
         st = Stream.objects.filter(shop=sh)
         ser=StreamSerializers(st, many=True)
-        # gd=Goods.objects.filter(stream=st)
-        # sergd=GoodsSerializers(gd, many=True)
-        # print(ser.data)
         s=ser.data
-        # s.append(1)
-        # goods=[]
-        # for i in sergd:
-        #     goods.append(i.data)
-        # s={"stream":s,"goods":goods}
-        # for i in request.data["goods"]:
-
         x=Response(s)
         x["Access-Control-Allow-Origin"]="*"
         return x
@@ -97,7 +88,12 @@ class list(APIView):
 class create(APIView):
     def post(self, request):
         try:
-            u=User.objects.get(token=request.data["token"])
+             n=request.data
+            if type(n)==QueryDict:
+                n=n.copy()
+                n=n.popitem()[0]
+            t=request.data["token"]
+            u=User.objects.get(token=t)
             sh=Shop.objects.get(user=u)
         except:
             x=Response({"error":""}, status=400)
@@ -124,6 +120,23 @@ class create(APIView):
         return x
 
 
+# class get(APIView):
+#     def get(self, request):
+#         # print(request.query_params["token"])
+#         try:
+#             u=User.objects.get(token=request.query_params["token"])
+#             sh=Shop.objects.get(user=u)
+#         except:
+#             print("нет магазина")
+#             x=Response({"error":""}, status=400)
+#             x["Access-Control-Allow-Origin"]="*"
+#             return x
+#         st = Stream.objects.filter(shop=sh)
+#         ser=StreamSerializers(st, many=True)
+#         s=ser.data
+#         x=Response(s)
+#         x["Access-Control-Allow-Origin"]="*"
+#         return x
 
 
 
