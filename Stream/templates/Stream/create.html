@@ -12,7 +12,12 @@
     {% csrf_token %}
     <h1>Создание стрима</h1>
     {{form.as_p}}
+    <br>
     <input type="submit" value="Отправить">
+  </form>
+
+  <form action="post">
+    
   </form>
 
 {% endblock %}
@@ -21,6 +26,12 @@
 <script>
   function setUrl(){
     document.forms[0].url.value="https://mem.io/";
+  }
+  var count=0;
+  function addGoods(){
+    let d=document.getElementById("goods");
+    d.innerHTML+='<p><label for="name'+count+'">Название:</label> <input type="text" name="name'+count+'" maxlength="50" required="" id="name'+count+'"></p><p><label for="description'+count+'">Описание:</label> <input type="text" name="description'+count+'" maxlength="250" id="description'+count+'"></p><p><label for="cost'+count+'">Стоимость:</label> <input type="number" name="cost'+count+'" required="" id="cost'+count+'"></p><p><label for="url'+count+'">Ссылка:</label> <input type="url" name="url'+count+'" required="" id="url'+count+'"></p><p><label for="img'+count+'">Изображение:</label><input type="file" name="img'+count+'" accept="image/*" id="img'+count+'"></p><hr>';
+    count+=1;
   }
 </script>
 {%endblock%}

@@ -24,6 +24,7 @@ urlpatterns = [
     path("user/", include("User.urls")),
     path("streams/", include("Stream.urls")),
     path("shop/", include("Shop.urls")),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:

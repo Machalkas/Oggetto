@@ -26,7 +26,7 @@ SECRET_KEY = 'wilek3!uiz99cw@okfccl2a+ah@*c6emxr5_r%5sx4ii(4a55!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.86.19','127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup',
+    'rest_framework',
     'Shop',
     'Stream',
     'User',
@@ -75,6 +76,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Oggetto.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

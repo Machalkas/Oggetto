@@ -20,6 +20,7 @@ class Goods(models.Model):
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")
     cost=models.PositiveIntegerField(blank=False, null=False, verbose_name="Стоимость")
     url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
+    img=models.ImageField(upload_to="goods", blank=True, null=True, verbose_name="Изображение")
     def __str__(self):
         return self.name
     class Meta:

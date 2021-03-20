@@ -11,6 +11,11 @@ class ShopForm(forms.ModelForm):
         
 
 class GoodsForm(forms.ModelForm):
+    # def __init__(self, qs=None, *args, **kwargs):
+    #     super(ProjectSettings, self).__init__(*args, **kwargs)
+    #     if qs:
+    #         self.fields user=forms.ModelMultipleChoiceField( queryset=User.objects.all(), required=False)
     class Meta:
         model=Goods
         fields="__all__"
+        exclude = ["shop"]

@@ -6,7 +6,7 @@ class Stream(models.Model):
     shop=models.ForeignKey("Shop.Shop", blank=True, null=True, default=None, on_delete=models.CASCADE, verbose_name="Магазин")
     is_active=models.BooleanField(blank=False, unique=False, default=True, verbose_name="Стрим активен")
     def __str__(self):
-        return self.shop.name
+        return self.title
 
     class Meta:
         verbose_name = 'Стрим'
