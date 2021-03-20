@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["dashboard"],{7277:function(a,e,n){"use strict";n.r(e);var s=function(){var a=this,e=a.$createElement;a._self._c;return a._m(0)},t=[function(){var a=this,e=a.$createElement,n=a._self._c||e;return n("div",{staticClass:"dashboard"},[n("h1",[a._v("This is an dashboard page")])])}],r=n("2877"),c={},i=Object(r["a"])(c,s,t,!1,null,null,null);e["default"]=i.exports}}]);
+//# sourceMappingURL=dashboard.483bc85e.js.map

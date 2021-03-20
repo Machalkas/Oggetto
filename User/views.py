@@ -38,11 +38,12 @@ def logIn(request):
             else:
                 pass        
     else:
-        form = LoginForm()
-    # x=JsonResponse({"mes":"hui"})
-    # x["Access-Control-Allow-Origin"]="*"
-    # return x
-    return render(request, 'User/login.html', {'form':form})
+        return render(request, "User/index.html")
+        # form = LoginForm()
+    x=JsonResponse({"mes":"hui"})
+    x["Access-Control-Allow-Origin"]="*"
+    return x
+    # return render(request, 'User/login.html', {'form':form})
 
 def logOut(request):
     logout(request)
