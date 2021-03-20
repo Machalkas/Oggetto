@@ -26,7 +26,7 @@ SECRET_KEY = 'wilek3!uiz99cw@okfccl2a+ah@*c6emxr5_r%5sx4ii(4a55!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.86.19','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.86.19','192.168.75.19','127.0.0.1']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'rest_framework',
+    'corsheaders',
     'Shop',
     'Stream',
     'User',
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Oggetto.urls'

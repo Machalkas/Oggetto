@@ -14,7 +14,7 @@ class Shop(models.Model):
         verbose_name_plural = 'Магазины'
 
 class Goods(models.Model):
-    shop=models.ForeignKey(Shop, blank=False, null=False, on_delete=models.CASCADE, verbose_name="Магазин")
+    shop=models.ForeignKey(Shop, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Магазин")
     stream=models.ForeignKey("Stream.Stream", blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Стрим")
     name=models.CharField(max_length=50, blank=False, null=False, verbose_name="Название товара")
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")

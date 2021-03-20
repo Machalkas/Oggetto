@@ -5,4 +5,5 @@ urlpatterns = [
     # path('create', views.create, name="createShop"),
     path('view', views.view.as_view()),
     path('create', views.create.as_view()),
+    path('addgoods', views.addGoods.as_view()),
 ]

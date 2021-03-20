@@ -5,6 +5,7 @@ class Stream(models.Model):
     title=models.CharField(max_length=50, blank=False, null=False, default="",  unique=True, verbose_name="Название")
     shop=models.ForeignKey("Shop.Shop", blank=True, null=True, default=None, on_delete=models.CASCADE, verbose_name="Магазин")
     is_active=models.BooleanField(blank=False, unique=False, default=True, verbose_name="Стрим активен")
+    date=models.DateTimeField(blank=False, null=True, auto_now_add=True, verbose_name="Создано")
     def __str__(self):
         return self.title
 

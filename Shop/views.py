@@ -7,7 +7,7 @@ from .models import Shop
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ShopSerializers
+from .serializers import ShopSerializers, GoodsSerializers
 
 # def create(request):
 #     if not request.user.is_shop:
@@ -53,3 +53,24 @@ class create(APIView):
             shop.save()
             return Response(status=201)
         return Response(status=400)
+
+class addGoods(APIView):
+    def post(self, request):
+        try:
+            sh=Shop.objects.get(user=request.user)
+        except:
+            x=Response({"error":""}, status=400)
+            x["Access-Control-Allow-Origin"]="*"
+            return x
+        goods=GoodsSerializers(data=request.data)
+        if goods.is_valid():
+            s=goods.save()
+            s.user=request.user
+            s.shop=sh
+            s.save()
+            x=Response(status=201)
+            x["Access-Control-Allow-Origin"]="*"
+            return x
+        x=Response(status=400)
+        x["Access-Control-Allow-Origin"]="*"
+        return x
