@@ -4,13 +4,13 @@
 {% block head%}
 <!--стили ток для этой стр. -->
 {% endblock head %}
-{% block title %}Хакатон | Создать магазин{% endblock title %}
+{% block title %}Хакатон | Создать стрим{% endblock title %}
 {% block content %}
 {% include "header.html" %}
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" onsubmit="setUrl()">
     {% csrf_token %}
-    <h1>Создание магазина</h1>
+    <h1>Создание стрима</h1>
     {{form.as_p}}
     <input type="submit" value="Отправить">
   </form>
@@ -18,4 +18,9 @@
 {% endblock %}
 {%block scripts%}
 <!--скрипты ток для этой стр. -->
+<script>
+  function setUrl(){
+    document.forms[0].url.value="https://mem.io/";
+  }
+</script>
 {%endblock%}

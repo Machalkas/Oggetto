@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head%}
+<!--стили ток для этой стр. -->
+{% endblock head %}
+{% block title %}Хакатон | Стримы{% endblock title %}
+{% block content %}
+{% include "header.html" %}
+
+<a href="/streams/create" style="margin-bottom: 3em;">
+    <div style="border: solid forestgreen; border-width: 2px; max-width: 2em;">+</div>
+</a>
+<div>
+{% if not streams%}
+<h3>У вас нет стримов</h3>
+{%else%}
+{%for s in streams%}
+<a href="#">
+<div style="border:solid orangered; border-width: 1px; max-width: 7em;">
+<h4>s.title</h4>
+{%if s.is_active%}
+<p>онлайн</p>
+{%else%}
+<p>закончился</p>
+{%endif%}
+</div>
+</a>
+{%endfor%}
+{%endif%}
+</div>
+
+{% endblock %}
+{%block scripts%}
+<!--скрипты ток для этой стр. -->
+{%endblock%}

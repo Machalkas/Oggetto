@@ -1,12 +1,12 @@
 from django.db import models
 
 class Shop(models.Model):
-    user=models.ForeignKey("User.User", blank=True, null=True, default=None, on_delete=models.CASCADE, unique=True, verbose_name="Пользователь")
-    # user=models.OneToOneField("User.User", blank=False, null=False, on_delete=models.CASCADE, verbose_name="Пользователь")
+    # user=models.ForeignKey("User.User", blank=True, null=True, default=None, on_delete=models.CASCADE, unique=True, verbose_name="Пользователь")
+    user=models.OneToOneField("User.User", blank=True, null=True, on_delete=models.CASCADE, verbose_name="Пользователь")
     name=models.CharField(max_length=50, blank=False, null=False, unique=True, verbose_name="Название магазина")
     description=models.CharField(max_length=250, blank=True, null=False, default="", verbose_name="Описание")
     url=models.URLField(blank=False, null=False, verbose_name="Ссылка")
-    logo=models.ImageField(upload_to="logo", verbose_name="Логотип")
+    logo=models.ImageField(upload_to="logo", blank=True, null=True, verbose_name="Логотип")
     def __str__(self):
         return self.name
     class Meta:
