@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.forms.models import model_to_dict
+# from django.shortcuts import render, redirect
+# from django.http import JsonResponse
+# from django.forms.models import model_to_dict
 from .models import Stream
 from Shop.models import Shop, Goods
 from Shop.forms import GoodsForm
 from .forms import StreamForm
+from User.models import User
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -66,10 +67,10 @@ from .serializers import StreamSerializers
 
 class list(APIView):
     def get(self, request):
-        # print(request.query_params["action"])
+        # print(request.query_params["token"])
         try:
-            print(request.user)
-            sh=Shop.objects.get(user=request.user)
+            u=User.objects.get(token=request.query_params["token"])
+            sh=Shop.objects.get(user=u)
         except:
             print("нет магазина")
             x=Response({"error":""}, status=400)
@@ -84,12 +85,13 @@ class list(APIView):
 class create(APIView):
     def post(self, request):
         try:
-            sh=Shop.objects.get(user=request.user)
+            u=User.objects.get(token=request.data["token"])
+            sh=Shop.objects.get(user=u)
         except:
             x=Response({"error":""}, status=400)
             x["Access-Control-Allow-Origin"]="*"
             return x
-        st=StreamSerializers(data=request.data)
+        st=StreamSerializers(data=request.data["data"], many=True)
         if st.is_valid():
             x=st.save()
             x.shop=sh

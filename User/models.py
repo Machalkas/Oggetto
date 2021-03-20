@@ -25,6 +25,7 @@ class User(AbstractUser):
     last_name=None
     email = models.EmailField('Email', unique=True)
     is_shop = models.BooleanField(null=False, default=False, blank=True, verbose_name="Магазин?")
+    token=models.CharField(max_length=100, null=False, blank=True, default="", verbose_name="Токен")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

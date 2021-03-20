@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
 from .models import Stream
-from Shop.models import Goods
+# from Shop.models import Goods
 
 class StreamSerializers(serializers.ModelSerializer):
     class Meta:
         model=Stream
-        # fields="__all__"
-        exclude = ("shop",)
+        fields="__all__"
+        # exclude = ("shop",)
 
 
 # class AddGoodsSerializers(serializers.ModelSerializer):

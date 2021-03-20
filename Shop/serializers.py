@@ -5,7 +5,7 @@ from .models import Shop, Goods
 class ShopSerializers(serializers.ModelSerializer):
     class Meta:
         model=Shop
-        fields="__all__"
+        exclude=("user",)
 
 class GoodsSerializers(serializers.ModelSerializer):
     class Meta:
