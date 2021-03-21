@@ -72,7 +72,7 @@ class list(APIView):
     def get(self, request):
         # print(request.query_params["token"])
         try:
-            u=User.objects.get(token=request.query_params["token"])
+            u=User.objects.get(id=request.query_params["token"])
             sh=Shop.objects.get(user=u)
         except:
             print("нет магазина")
@@ -95,7 +95,7 @@ class create(APIView):
                 n=json.loads(n.popitem()[0])
                 print(n)
             t=n["token"]
-            u=User.objects.get(token=t)
+            u=User.objects.get(id=t)
             sh=Shop.objects.get(user=u)
         except:
             x=Response({"error":""}, status=400)
@@ -127,7 +127,7 @@ class get(APIView):
         # print(request.query_params["token"])
         try:
             stream_id=request.query_params["stream"]
-            # u=User.objects.get(token=request.query_params["token"])
+            # u=User.objects.get(id=request.query_params["token"])
             # sh=Shop.objects.get(user=u)
         except:
             print("нет магазина")

@@ -12,7 +12,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
-    list_display = ('email','is_shop','is_superuser', 'token')
+    list_display = ('id','email','is_shop','is_superuser', 'token')
     fieldsets = (
         (None, {'fields': ('email', 'password', 'token')}),
         ('Разрешения', {'fields': ('is_staff', 'is_active')}),

@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'Stream',
     'User',
     'Main',
-    'djoser',
-    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -82,12 +80,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Oggetto.wsgi.application'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-    'rest_framework.permissions.IsAuthenticated',
-),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 
 # Database
