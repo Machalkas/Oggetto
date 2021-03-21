@@ -1,15 +1,29 @@
-{% extends "base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="">
 
-{% block head%}
-<!--стили ток для этой стр. -->
-{% endblock head %}
-{% block title %}Хакатон | Регистрация{% endblock title %}
-{% block content %}
-{% include "header.html" %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="/favicon.ico">
+    <title>s-stream</title>
+    <link href="{%static 'css/dashboard.ddcf3732.css'%}" rel="prefetch">
+    <link href="{%static 'js/about.fc8c1d32.js'%}" rel="prefetch">
+    <link href="{%static 'js/authorize.044ac1cd.js'%}" rel="prefetch">
+    <link href="{%static 'js/authorize~dashboard.f5058ad5.js'%}" rel="prefetch">
+    <link href="{%static 'js/dashboard.3d0c20e9.js'%}" rel="prefetch">
+    <link href="{%static 'css/app.601d2ada.css'%}" rel="preload" as="style">
+    <link href="{%static 'js/app.0af60898.js'%}" rel="preload" as="script">
+    <link href="{%static 'js/chunk-vendors.38cf5676.js'%}" rel="preload" as="script">
+    <link href="{%static 'css/app.601d2ada.css'%}" rel="stylesheet">
+</head>
 
-<p>Русские <span style="color: maroon;">сосать</span></p>
-  {% endblock %}
-  {%block scripts%}
-<!--скрипты ток для этой стр. -->
-  {%endblock%}
+<body><noscript><strong>We're sorry but s-stream doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong></noscript>
+    <div id="app"></div>
+    <script src="{%static 'js/chunk-vendors.38cf5676.js'%}"></script>
+    <script src="{%static 'js/app.0af60898.js'%}"></script>
+</body>
+
+</html>
