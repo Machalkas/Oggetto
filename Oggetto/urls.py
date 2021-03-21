@@ -25,6 +25,10 @@ urlpatterns = [
     path("streams/", include("Stream.urls")),
     path("shop/", include("Shop.urls")),
     path('api-auth/', include('rest_framework.urls')),
+
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path("api/accounts/",include("User.urls"))
 ]
 
 if settings.DEBUG:
