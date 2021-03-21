@@ -15,6 +15,7 @@ from Shop.serializers import GoodsSerializers
 from django.http import QueryDict
 import json
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 
 # def listSt(request):
 #     try:
@@ -73,7 +74,9 @@ class list(APIView):
     def get(self, request):
         # print(request.query_params["token"])
         try:
-            u=User.objects.get(id=Token.objects.get(key=request.query_params["token"]))
+            tk=request.query_params["token"]
+            t=Token.objects.get(key=tk)
+            u=User.objects.get(id=t.user)
             sh=Shop.objects.get(user=u)
         except:
             print("нет магазина")
@@ -97,7 +100,7 @@ class create(APIView):
                 print(n)
             t=n["token"]
             # u=User.objects.get(id=t)
-            u=User.objects.get(id=Token.objects.get(key=t))
+            u=User.objects.get(id=Token.objects.get(key=t).user)
             sh=Shop.objects.get(user=u)
         except:
             x=Response({"error":""}, status=400)
@@ -146,6 +149,14 @@ class get(APIView):
         x["Access-Control-Allow-Origin"]="*"
         return x
 
-
-
-
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email
+        })
