@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
 from django.http import JsonResponse
+from rest_framework import viewsets
+from .models import User
+
 
 def join(request):
     if request.method=="POST":
@@ -48,3 +51,4 @@ def logIn(request):
 def logOut(request):
     logout(request)
     return redirect("/user/login")
+
