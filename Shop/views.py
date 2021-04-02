@@ -8,6 +8,7 @@ from .models import Shop
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ShopSerializers, GoodsSerializers
+from rest_framework.authtoken.models import Token
 
 # def create(request):
 #     if not request.user.is_shop:
@@ -38,7 +39,7 @@ from .serializers import ShopSerializers, GoodsSerializers
 #                 return JsonResponse({"ok":""})
 #             else:
 #                 return JsonResponse({"error":"форма не валидна"}, status=400)
-        
+# ты пидор!    
 class view(APIView):
     def get(self, request):
         # print(request.query_params["action"])

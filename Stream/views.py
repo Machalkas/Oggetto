@@ -72,13 +72,13 @@ from rest_framework.authtoken.views import ObtainAuthToken
 
 class list(APIView):
     def get(self, request):
-        # print(request.query_params["token"])
+        print(request.query_params["token"])
         try:
             tk=request.query_params["token"]
             t=Token.objects.get(key=tk)
-            u=User.objects.get(id=t.user)
+            u=t.user
             sh=Shop.objects.get(user=u)
-        except:
+        except ZeroDivisionError:
             print("нет магазина")
             x=Response({"error":""}, status=400)
             x["Access-Control-Allow-Origin"]="*"
@@ -98,9 +98,10 @@ class create(APIView):
                 n=n.copy()
                 n=json.loads(n.popitem()[0])
                 print(n)
-            t=n["token"]
+            tk=n["token"]
             # u=User.objects.get(id=t)
-            u=User.objects.get(id=Token.objects.get(key=t).user)
+            t=Token.objects.get(key=tk)
+            u=t.user
             sh=Shop.objects.get(user=u)
         except:
             x=Response({"error":""}, status=400)
